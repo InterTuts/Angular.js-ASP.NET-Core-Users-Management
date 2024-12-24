@@ -1,0 +1,51 @@
+<app-auth-layout>
+  <mat-card-title class="auth-title">{{ 'reset_password' | translate }}</mat-card-title>
+  <mat-card-content>
+    <form
+      class="auth-form"
+      [formGroup]="resetForm"
+      (submit)="onReset($event)"
+    >
+      <mat-form-field appearance="fill" class="full-width auth-form-email">
+        <mat-label class="auth-form-label">{{ 'email' | translate }}</mat-label>
+        <input matInput
+          type="email"
+          formControlName="email"
+          [placeholder]="'enter_your_email' | translate"
+        />
+        <mat-error *ngIf="(resetForm.get('email')?.dirty || resetForm.get('email')?.touched) || errors.email" class="auth-form-error">{{ errors.email?errors.email:'auth_email_not_valid' | translate }}</mat-error>
+      </mat-form-field>
+
+      <div class="auth-form-actions">
+        <button mat-raised-button color="primary" type="submit" class="auth-form-submit">
+          {{ 'reset' | translate }}
+          <mat-icon *ngIf="!isSubmitting">arrow_forward</mat-icon>
+          <mat-icon *ngIf="isSubmitting" class="rotate-animation">autorenew</mat-icon>
+        </button>
+      </div>
+
+      <div class="auth-form-alerts">
+        <div
+          class="flex items-center px-4 py-3 mb-4 auth-form-alert-success"
+          role="alert"
+          *ngIf="successMessage"
+        >
+          <mat-icon class="auth-form-alert-success-icon">notifications</mat-icon>
+          <p>{{ successMessage }}</p>
+        </div>
+        <div
+          class="flex items-center px-4 py-3 auth-form-alert-error"
+          role="alert"
+          *ngIf="errorMessage"
+        >
+          <mat-icon class="auth-form-alert-error-icon">notifications</mat-icon>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <mat-card-footer class="auth-footer">
+    {{ 'do_you_remember_password' | translate }} <a routerLink="/" class="auth-link">{{ 'sign_in' | translate }}</a>
+  </mat-card-footer>
+</app-auth-layout>

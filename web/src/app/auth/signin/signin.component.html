@@ -1,0 +1,82 @@
+<app-auth-layout>
+  <mat-card-title class="auth-title">{{ 'sign_in_to_website' | translate }} {{ siteName }}</mat-card-title>
+  <mat-card-actions class="auth-social-access">
+    <div>
+      <a
+        routerLink="/auth/google-connect"
+        class="auth-main-form-continue-google-link"
+      >
+        <img [src]="'google.png'" alt="Google Login">
+        {{ 'continue_with_google' | translate }}
+      </a>
+    </div>
+    <div class="auth-main-form-separator" [attr.data-text]="'or' | translate"></div>
+  </mat-card-actions>
+  <mat-card-content>
+    <form
+      class="auth-form"
+      [formGroup]="signInForm"
+      (submit)="onSignIn($event)"
+      >
+      <mat-form-field appearance="fill" class="full-width auth-form-email">
+        <mat-label class="auth-form-label">
+          {{ 'email' | translate }}
+        </mat-label>
+        <input matInput
+          type="email"
+          [placeholder]="'enter_your_email' | translate"
+          formControlName="email"
+        />
+        <mat-error *ngIf="(signInForm.get('email')?.dirty || signInForm.get('email')?.touched) || errors.email" class="auth-form-error">{{ errors.email?errors.email:'auth_email_not_valid' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width auth-form-password">
+        <mat-label class="auth-form-label">
+          {{ 'password' | translate }}
+        </mat-label>
+        <input matInput
+          type="password"
+          formControlName="password"
+          [placeholder]="'enter_your_password' | translate"
+        />
+        <mat-error *ngIf="(signInForm.get('password')?.dirty || signInForm.get('password')?.touched) || errors.password" class="auth-form-error">{{ errors.password?errors.password:'auth_password_short' | translate }}</mat-error>
+      </mat-form-field>
+
+      <div class="auth-form-info">
+        <mat-checkbox class="auth-remember-me" formControlName="rememberMe">{{ 'remember_me' | translate }}</mat-checkbox>
+        <a routerLink="/auth/reset" class="auth-link">{{ 'forgot_password' | translate }}</a>
+      </div>
+
+      <div class="auth-form-actions">
+        <button mat-raised-button color="primary" type="submit" class="auth-form-submit">
+          {{ 'sign_in' | translate }}
+          <mat-icon *ngIf="!isSubmitting">arrow_forward</mat-icon>
+          <mat-icon *ngIf="isSubmitting" class="rotate-animation">autorenew</mat-icon>
+        </button>
+      </div>
+
+      <div class="auth-form-alerts">
+        <div
+          class="flex items-center px-4 py-3 mb-4 auth-form-alert-success"
+          role="alert"
+          *ngIf="successMessage"
+        >
+          <mat-icon class="auth-form-alert-success-icon">notifications</mat-icon>
+          <p>{{ successMessage }}</p>
+        </div>
+        <div
+          class="flex items-center px-4 py-3 auth-form-alert-error"
+          role="alert"
+          *ngIf="errorMessage"
+        >
+          <mat-icon class="auth-form-alert-error-icon">notifications</mat-icon>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <mat-card-footer class="auth-footer">
+    {{ 'dont_have_an_account' | translate }} <a routerLink="/auth/sign-up" class="auth-link">{{ 'register_an_account' | translate }}</a>
+  </mat-card-footer>
+</app-auth-layout>

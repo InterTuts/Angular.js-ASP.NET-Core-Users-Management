@@ -1,0 +1,144 @@
+// GENERAL COLORS
+@use '../general/colors';
+
+// GENERAL FONTS
+@use '../general/fonts';
+
+.auth-form {
+
+  .auth-form-label {
+    margin-top: -10px;
+    font-family: fonts.$font-2;
+    font-size: 13px;
+    color: colors.$color-black;
+  }
+
+  .auth-form-email,
+  .auth-form-password {
+    margin-bottom: 15px;
+    margin-top: -10px;
+    width: 100%;
+    font-size: 13px;
+    color: colors.$color-black;
+  }
+
+  .auth-remember-me {
+      font-family: fonts.$font-2;
+      font-size: 13px;
+      color: colors.$color-black;
+  }
+
+  .auth-form-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .auth-link {
+      margin: 12px 0 19px;
+      border-bottom: 1px solid colors.$color-black;
+      line-height: 16px;
+      text-decoration: none;
+      font-family: fonts.$font-2;
+      font-size: 13px;
+      color: colors.$color-black;
+
+      &:hover {
+        border-bottom: 1px solid transparent;
+      }
+
+    }
+
+  }
+
+  .auth-form-actions {
+    margin: 11px 0 0;
+    width: 100%;
+
+    .auth-form-submit {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      font-family: fonts.$font-5;
+      font-size: 15px;
+      background-color: colors.$color-black-light;
+      color: #FFFFFF;
+
+      .mat-icon {
+        vertical-align: middle;
+        margin-left: 5px;
+
+        &.rotate-animation {
+          animation: rotate-animation 2s linear infinite;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.auth-form-alerts {
+  .auth-form-alert-success,
+  .auth-form-alert-error {
+    display: flex;
+    margin-top: 15px;
+    line-height: 24px;
+    font-family: fonts.$font-7;
+    font-size: 14px;
+    font-weight: 400;
+    transform-origin: top;
+    animation: top-to-bottom-animation 0.3s linear forwards;
+
+    .auth-form-alert-success-icon,
+    .auth-form-alert-error-icon {
+      margin: 13px 5px 13px 13px;
+      width: 24px;
+    }
+  }
+
+  .auth-form-alert-success {
+    background-color: rgba($color: colors.$color-blue, $alpha: 0.1);
+    color: colors.$color-blue;
+
+    .auth-form-alert-success-icon {
+      color: colors.$color-blue;
+    }
+  }
+
+  .auth-form-alert-error {
+    background-color: rgba($color: colors.$color-red, $alpha: 0.1);
+    color: colors.$color-red;
+
+    .auth-form-alert-error-icon {
+      color: colors.$color-red;
+    }
+  }
+
+  .auth-form-alert-error-static {
+    animation: none;
+  }
+}
+
+// CREATE THE ROTATE ANIMATION KEYFRAME
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// SHOW BOX FROM TOP TO BOTTOM
+@keyframes top-to-bottom-animation {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}

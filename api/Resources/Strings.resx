@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="NoTokenFound" xml:space="preserve">
+        <value>The access token was not found.</value>
+    </data>
+    <data name="TokenNoValid" xml:space="preserve">
+        <value>The access token is not valid.</value>
+    </data>
+    <data name="PleaseEnterPassword" xml:space="preserve">
+        <value>Please, enter a password.</value>
+    </data>       
+    <data name="PasswordRequired" xml:space="preserve">
+        <value>The password is required.</value>
+    </data>
+    <data name="PasswordLength" xml:space="preserve">
+        <value>The password should have a length between 8 and 20 characters.</value>
+    </data>   
+    <data name="PasswordNoSpaces" xml:space="preserve">
+        <value>The password shouldn't contain empty spaces.</value>
+    </data>  
+    <data name="PasswordWasSaved" xml:space="preserve">
+        <value>The password was saved successfully.</value>
+    </data>  
+    <data name="PasswordWasNotSaved" xml:space="preserve">
+        <value>The password was not saved successfully.</value>
+    </data>   
+    <data name="PasswordWasChanged" xml:space="preserve">
+        <value>The password was changed successfully.</value>
+    </data>  
+    <data name="PasswordWasNotChanged" xml:space="preserve">
+        <value>The password was not changed successfully.</value>
+    </data>   
+    <data name="EmailRequired" xml:space="preserve">
+        <value>The email address is required.</value>
+    </data>
+    <data name="EmailNotValid" xml:space="preserve">
+        <value>Please enter a valid email address.</value>
+    </data>
+    <data name="EmailFound" xml:space="preserve">
+        <value>The email is already in use in our sistem.</value>
+    </data>
+    <data name="EmailNotFound" xml:space="preserve">
+        <value>The email was not found in our sistem.</value>
+    </data>
+    <data name="IncorrectEmailPassword" xml:space="preserve">
+        <value>The email or password is not correct.</value>
+    </data>    
+    <data name="AccountCreated" xml:space="preserve">
+        <value>The account was created successfully.</value>
+    </data>
+    <data name="AccountNotCreated" xml:space="preserve">
+        <value>The account was not created successfully.</value>
+    </data>    
+    <data name="AccountNotFound" xml:space="preserve">
+        <value>The user was not found.</value>
+    </data>
+    <data name="SuccessSignIn" xml:space="preserve">
+        <value>You have successfully signed in.</value>
+    </data>  
+    <data name="ErrorSignUp" xml:space="preserve">
+        <value>An error occurred while sign up.</value>
+    </data>    
+    <data name="ErrorSignIn" xml:space="preserve">
+        <value>An error occurred while sign in.</value>
+    </data>  
+    <data name="ResetLinkSent" xml:space="preserve">
+        <value>The reset password link was sent to your email.</value>
+    </data>   
+    <data name="YourReceivingEmailPasswordReset" xml:space="preserve">
+        <value>You're receiving this email because you requested a password reset for your account.</value>
+    </data>
+    <data name="CreateNewPassword" xml:space="preserve">
+        <value>Please go to the following page and create a new password:</value>
+    </data> 
+    <data name="PasswordReset" xml:space="preserve">
+        <value>Password Reset</value>
+    </data>  
+    <data name="ResetCodeExpired" xml:space="preserve">
+        <value>The reset code has expired.</value>
+    </data>     
+    <data name="EmailIsNotValid" xml:space="preserve">
+        <value>The email is not valid.</value>
+    </data>
+    <data name="EmailIsTooLong" xml:space="preserve">
+        <value>The email is too long.</value>
+    </data>
+    <data name="CodeMissingOrWrong" xml:space="preserve">
+        <value>The reset code is not valid.</value>
+    </data> 
+    <data name="SocialFound" xml:space="preserve">
+        <value>The Google account is already in use.</value>
+    </data> 
+    <data name="SocialFound" xml:space="preserve">
+        <value>The Google account is already in use.</value>
+    </data>
+    <data name="AuthorizationCodeNotValid" xml:space="preserve">
+        <value>The authorization code is not valid.</value>
+    </data>  
+    <data name="AnUnknownError" xml:space="preserve">
+        <value>An unknown error occurred.</value>
+    </data>
+    <data name="AccessTokenNotFound" xml:space="preserve">
+        <value>Access token not found.</value>
+    </data>
+    <data name="FailedRetrieveUserInfo" xml:space="preserve">
+        <value>Failed to retrieve user info.</value>
+    </data>
+    <data name="UserNotFound" xml:space="preserve">
+        <value>User info not found.</value>
+    </data>  
+    <data name="AccessCodeNotGenerated" xml:space="preserve">
+        <value>The access code wasn't generated successfully.</value>
+    </data>  
+    <data name="RegistrationRequired" xml:space="preserve">
+        <value>Registration is required.</value>
+    </data>      
+    <data name="SocialIdNotValid" xml:space="preserve">
+        <value>Social ID is not valid.</value>
+    </data>                                                      
+</root>

@@ -1,0 +1,27 @@
+@use './app/shared/styles/general/colors';
+
+body { color: colors.$color-black-light; }
+
+.mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled),
+.mat-mdc-form-field-focus-overlay {
+  height: 46px;
+  border-radius: 4px;
+  background-color: rgba($color: colors.$color-grey, $alpha: 0.7) !important;
+}
+
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+  top: calc(var(--mat-form-field-container-height, 44px) / 2) !important;
+}
+
+.mat-mdc-form-field-infix {
+  padding-top: var(--mat-form-field-filled-with-label-container-padding-top, 15px) !important;
+}
+
+.mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 2px !important;
+ }

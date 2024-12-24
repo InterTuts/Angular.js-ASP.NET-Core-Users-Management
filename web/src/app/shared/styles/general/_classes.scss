@@ -1,0 +1,33 @@
+// GENERAL CLASSES
+
+.align-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.align-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.align-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.box {
+  margin: 1px;
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
