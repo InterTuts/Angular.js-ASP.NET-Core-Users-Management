@@ -32,5 +32,13 @@
   "your_email": "Your email",
   "redirecting": "Redirecting ...",
   "set_password": "Set Password",
-  "authorization_code_not_valid": "The authorization code is not valid."
+  "authorization_code_not_valid": "The authorization code is not valid.",
+  "users": "Users",
+  "search": "Search",
+  "export": "Export",
+  "plans": "Plans",
+  "enter_name_email": "Enter name or email ...",
+  "enter_plan_name": "Enter plan's name ...",
+  "new_user": "New User",
+  "new_plan": "New Plan"
 }

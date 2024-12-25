@@ -1,0 +1,46 @@
+<div class="navigation" *ngIf="total > 0">
+  <h3>
+    {{ (((page - 1) * limit) + 1) + '-' + (((page * limit) < total)?(page * limit):total) }} {{ 'of' | translate }} {{ total}} {{ 'results' | translate }}
+  </h3>
+  <ul class="flex">
+    <li class="page-item" *ngIf="page > 1; else noPrevious">
+      <a href="#" class="page-link" [attr.data-page]="page - 1" (click)="onPageClick($event, (page - 1))">
+        <mat-icon>
+          chevron_left
+        </mat-icon>
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let p of pages">
+        <a href="#" class="page-link" [ngClass]="{'active': (page === p)}" (click)="onPageClick($event, p)">
+          {{ p }}
+        </a>
+    </li>
+    <li class="page-item" *ngIf="(limit * page) < total; else noNext">
+        <a href="#" class="page-link" [attr.data-page]="page + 1" (click)="onPageClick($event, (page + 1))">
+          <mat-icon>
+            chevron_right
+          </mat-icon>
+        </a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noPrevious>
+  <li class="page-item disabled">
+    <a href="#" class="page-link">
+      <mat-icon>
+        chevron_left
+      </mat-icon>
+    </a>
+  </li>
+</ng-template>
+
+<ng-template #noNext>
+  <li class="page-item disabled">
+    <a href="#" class="page-link">
+      <mat-icon>
+        chevron_right
+      </mat-icon>
+    </a>
+  </li>
+</ng-template>

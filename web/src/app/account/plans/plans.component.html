@@ -1,5 +1,177 @@
 <app-account-layout>
-  <div class="content box">
-
+  <div class="list-container">
+    <div class="list-header">
+      <div class="row">
+        <h3>
+          {{ 'plans' | translate }}
+          <span>
+            &#45;
+          </span>
+          <a href="#">
+            {{ 'new_plan' | translate }}
+          </a>
+        </h3>
+        <div class="input-group">
+          <input type="text" [placeholder]="'enter_plan_name' | translate">
+          <button type="button">
+            <mat-icon>search</mat-icon>
+            {{ 'search' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="list-body">
+      <div class="list-body-head">
+        <div class="list-row-plans">
+          <div>Name</div>
+          <div>Price</div>
+          <div>Period</div>
+          <div>Actions</div>
+        </div>
+      </div>
+      <div class="list-body-items">
+        <div class="list-row-plans">
+          <div>
+            <div>
+              <h3>
+                <a href="#">
+                  Basic Plan
+                </a>
+              </h3>
+              <h4>25 users</h4>
+            </div>
+          </div>
+          <div>
+            Free
+          </div>
+          <div>25 days</div>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="list-row-plans">
+          <div>
+            <div>
+              <h3>
+                <a href="#">
+                  Standard Plan
+                </a>
+              </h3>
+              <h4>10 users</h4>
+            </div>
+          </div>
+          <div>
+            10.00 USD
+          </div>
+          <div>10 days</div>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="list-row-plans">
+          <div>
+            <div>
+              <h3>
+                <a href="#">
+                  Professional Plan
+                </a>
+              </h3>
+              <h4>17 users</h4>
+            </div>
+          </div>
+          <div>
+            20.00 USD
+          </div>
+          <div>20 days</div>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="list-row-plans">
+          <div>
+            <div>
+              <h3>
+                <a href="#">
+                  Premium Plan
+                </a>
+              </h3>
+              <h4>100 users</h4>
+            </div>
+          </div>
+          <div>
+            30.00 USD
+          </div>
+          <div>58 days</div>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-navigation [total]="1000" [page]="3" [limit]="10"></app-navigation>
   </div>
 </app-account-layout>

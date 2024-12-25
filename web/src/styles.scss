@@ -2,6 +2,30 @@
 
 body { color: colors.$color-black-light; }
 
+/* Reset styles for form elements */
+input, textarea, select, button, a {
+  border: none;
+  outline: none;
+  font: inherit;
+  background: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+input, textarea, select {
+  margin: 0;
+  padding: 0 15px;
+}
+
+/* Reset specific states */
+input:focus, textarea:focus, select:focus, button:focus, a:focus {
+  outline: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .mat-mdc-card-content {
   padding: 0 !important;
 }

@@ -265,3 +265,4 @@ C:\Users\sirbu\OneDrive\Works\management\api\obj\Debug\net9.0\refint\api.dll
 C:\Users\sirbu\OneDrive\Works\management\api\obj\Debug\net9.0\api.pdb
 C:\Users\sirbu\OneDrive\Works\management\api\obj\Debug\net9.0\api.genruntimeconfig.cache
 C:\Users\sirbu\OneDrive\Works\management\api\obj\Debug\net9.0\ref\api.dll
+C:\Users\sirbu\OneDrive\Works\management\api\obj\Debug\net9.0\api.sourcelink.json

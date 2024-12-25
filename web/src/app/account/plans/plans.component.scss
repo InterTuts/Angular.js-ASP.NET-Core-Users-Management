@@ -1,0 +1,33 @@
+// GENERAL BUTTONS
+@use '../../shared/styles/general/buttons';
+
+// GENERAL CLASSES
+@use '../../shared/styles/general/classes';
+
+// GENERAL COLORS
+@use '../../shared/styles/general/colors';
+
+// GENERAL FONTS
+@use '../../shared/styles/general/fonts';
+
+// Account List
+@use '../../shared/styles/account/list';
+
+.mat-elevation-z8 {
+  overflow: hidden;
+  padding: 0;
+  border-radius: 6px;
+
+  table {
+
+    thead {
+
+      tr {
+        background-color: #fafafa !important;
+      }
+
+    }
+
+  }
+
+}
