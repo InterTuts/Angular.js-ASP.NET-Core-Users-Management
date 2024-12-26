@@ -19,6 +19,11 @@ export interface UserLogin {
   user?: User;
 }
 
+export interface CreateUser extends BaseUser {
+  first_name: string;
+  last_name: string;
+}
+
 export interface UserSocial {
   success: boolean;
   message: string;

@@ -116,5 +116,11 @@
     </data>      
     <data name="SocialIdNotValid" xml:space="preserve">
         <value>Social ID is not valid.</value>
-    </data>                                                      
+    </data> 
+    <data name="NameMissingOrWrong" xml:space="preserve">
+        <value>The first or last name is not valid.</value>
+    </data> 
+    <data name="NameTooLong" xml:space="preserve">
+        <value>The first or last name is too long.</value>
+    </data>                                                             
 </root>

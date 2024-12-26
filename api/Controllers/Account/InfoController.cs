@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 // App Utils
 using api.Utilities.Attributes;
 
-// Namespace for Auth Controllers
-namespace api.Controllers.Auth;
+// Namespace for Account Controllers
+namespace api.Controllers.Account;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="InfoController"/> class.

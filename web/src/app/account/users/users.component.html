@@ -7,7 +7,7 @@
           <span>
             &#45;
           </span>
-          <a href="#">
+          <a href="#" (click)="$event.preventDefault();showModal(newUser)">
             {{ 'new_user' | translate }}
           </a>
         </h3>
@@ -379,3 +379,100 @@
     <app-navigation [total]="1000" [page]="3" [limit]="10"></app-navigation>
   </div>
 </app-account-layout>
+<ng-template #newUser>
+  <div class="modal-header">
+    <h3>
+      {{ 'new_user' | translate }}
+    </h3>
+    <button type="button" class="modal-hide-modal" (click)="onCloseModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="newUserForm" id="create-user-form" (submit)="onSubmit($event)">
+      <div class="col-span-full modal-text-input">
+        <input type="text"
+          [placeholder]="'enter_first_name' | translate"
+          name="modal-text-input-first-name"
+          formControlName="firstName"
+          id="modal-text-input-first-name"
+          class="modal-form-input"
+        />
+        <label for="modal-text-input-first-name">
+          <mat-icon>person</mat-icon>
+        </label>
+        <div class="modal-form-input-error-message"
+          [ngClass]="{
+            'modal-form-input-error-message-show': errors.firstName
+            }">
+            {{ errors.firstName }}
+        </div>
+      </div>
+      <div class="col-span-full modal-text-input">
+        <input type="text"
+          [placeholder]="'enter_last_name' | translate"
+          name="modal-text-input-last-name"
+          formControlName="lastName"
+          id="modal-text-input-last-name"
+          class="modal-form-input"
+        />
+        <label for="modal-text-input-last-name">
+          <mat-icon>person</mat-icon>
+        </label>
+        <div class="modal-form-input-error-message"
+          [ngClass]="{
+            'modal-form-input-error-message-show': errors.lastName
+            }">
+            {{ errors.lastName }}
+        </div>
+      </div>
+      <div class="col-span-full modal-text-input">
+        <input type="email"
+          [placeholder]="'enter_email_address' | translate"
+          name="modal-text-input-email"
+          formControlName="email"
+          id="modal-text-input-email"
+          class="modal-form-input"
+          autoComplete="email"
+        />
+        <label for="modal-text-input-email">
+          <mat-icon>alternate_email</mat-icon>
+        </label>
+        <div class="modal-form-input-error-message"
+          [ngClass]="{
+            'modal-form-input-error-message-show': errors.email
+            }">
+            {{ errors.email }}
+        </div>
+      </div>
+      <div class="col-span-full modal-text-input">
+        <input type="password"
+          [placeholder]="'enter_password' | translate"
+          name="modal-text-input-password"
+          formControlName="password"
+          id="modal-text-input-password"
+          class="modal-form-input"
+          autoComplete="current-password"
+        />
+        <label for="modal-text-input-password">
+          <mat-icon>password</mat-icon>
+        </label>
+        <div class="modal-form-input-error-message"
+          [ngClass]="{
+            'modal-form-input-error-message-show': errors.password
+            }">
+            {{ errors.password }}
+        </div>
+      </div>
+      <div class="col-span-full modal-button">
+        <div class="text-right">
+          <button type="submit" class="mb-3 flex justify-between submit-button">
+            {{ 'save_user' | translate }}
+            <mat-icon *ngIf="isSubmitting" class="submitting-icon">autorenew</mat-icon>
+            <mat-icon *ngIf="!isSubmitting">arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

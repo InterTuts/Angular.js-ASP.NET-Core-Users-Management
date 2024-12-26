@@ -1,0 +1,7 @@
+<div class="modal" [ngClass]="modalStatus" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="modal-cover" (click)="closeModal($event)" (keydown)="handleKeydown($event)" role="button" tabindex="0" aria-label="Close modal">
+    <div class="modal-container" [ngClass]="modalSize">
+      <ng-content newMember></ng-content>
+    </div>
+  </div>
+</div>

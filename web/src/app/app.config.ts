@@ -12,6 +12,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // App Utils
 import { routes } from './app.routes';
 import { HttpInterceptorService } from './shared/services/http-interceptor.service';
+import { NotificationsDirective } from './shared/directives/notifications.directive';
 
 /**
  * Create loader for language file
@@ -45,8 +46,9 @@ export const appConfig: ApplicationConfig = {
           provide: TranslateLoader,
           useFactory: createTranslateLoader,
           deps: [HttpClient],
-        },
+        }
       })
     ),
-  ],
+    NotificationsDirective
+  ]
 };

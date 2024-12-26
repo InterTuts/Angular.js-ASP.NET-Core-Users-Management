@@ -1,5 +1,6 @@
 // App Utils
 using api.Models.Dtos;
+using api.Models.Dtos.Account;
 using api.Models.Dtos.Auth;
 
 // Namespace for Users Repositories
@@ -16,6 +17,12 @@ public interface IUsersRepository
     /// <param name="registrationDto">User dto with the user's data</param>
     /// <returns>Response with user data</returns>
     Task<ResponseDto<UserDto>> RegisterUserAsync(RegistrationDto registrationDto);
+
+    /// <summary>
+    /// Create a user
+    /// </summary>
+    /// <param name="createUserDto">User dto with the user's data</param>
+    Task<ResponseDto<UserDto>> CreateUserAsync(CreateUserDto createUserDto);
 
     /// <summary>
     /// Update a user password

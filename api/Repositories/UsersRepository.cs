@@ -5,6 +5,7 @@ using ExtensionsOptions = Microsoft.Extensions.Options;
 
 // App Namespaces
 using api.Models.Dtos;
+using api.Models.Dtos.Account;
 using api.Models.Dtos.Auth;
 using api.Models.Entities.Users;
 using api.Services.Interfaces;
@@ -19,14 +20,13 @@ namespace api.Repositories;
 /// </summary>
 /// <param name="_context">Database connection</param>
 /// <param name="logger">Logger instance</param>
-public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logger) : IUsersRepository
-{
+public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logger) : IUsersRepository {
+
     /// <summary>
     /// Register a user
     /// </summary>
     /// <param name="registrationDto">User dto with the user's data</param>
-    public async Task<ResponseDto<UserDto>> RegisterUserAsync(RegistrationDto registrationDto)
-    {
+    public async Task<ResponseDto<UserDto>> RegisterUserAsync(RegistrationDto registrationDto) {
 
         try {
 
@@ -66,6 +66,90 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
                 entity.SocialId = registrationDto.SocialId;
             }
 
+            // Add the entity to the database
+            _context.Users.Add(entity);
+
+            // Save the changes
+            int saveUser = await _context.SaveChangesAsync();
+
+            // Verify if the user was created
+            if ( saveUser > 0 ) {
+
+                // Return response
+                return new ResponseDto<UserDto> {
+                    Result = new UserDto {
+                        UserId = entity.UserId
+                    },
+                    Message = Words.Get("AccountCreated")
+                };  
+
+            } else {
+
+                // Return response
+                return new ResponseDto<UserDto> {
+                    Result = null,
+                    Message = Words.Get("AccountNotCreated")
+                };  
+                
+            }
+
+        } catch (InvalidOperationException e) {
+
+            // Return response
+            return new ResponseDto<UserDto> {
+                Result = null,
+                Message = e.Message
+            };                   
+
+        }
+
+    }
+
+    /// <summary>
+    /// Create a user
+    /// </summary>
+    /// <param name="createUserDto">User dto with the user's data</param>
+    public async Task<ResponseDto<UserDto>> CreateUserAsync(CreateUserDto createUserDto) {
+
+        try {
+
+            // Verify if the email is already registered
+            if ( _context.Users.Any(db_user => db_user.Email == createUserDto.Email!.Trim()) ) {
+
+                // Return response
+                return new ResponseDto<UserDto> {
+                    Result = null,
+                    Message = Words.Get("EmailFound")
+                };                
+
+            }
+
+            // Init the password hasher
+            var passwordHasher = new PasswordHasher<UserEntity>(ExtensionsOptions.Options.Create(new PasswordHasherOptions{CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3}));
+
+            // Init the user entity to use for password hashing
+            UserEntity userEntity = new();
+
+            // Init the User entity
+            UserEntity entity = new() {     
+
+                // Set the user's first name
+                FirstName = createUserDto.First_name!.Trim(),
+
+                // Set the user's last name
+                LastName = createUserDto.Last_name!.Trim(),
+
+                // Set the user's email
+                Email = createUserDto.Email!.Trim(),
+
+                // Set the user's password
+                Password = passwordHasher.HashPassword(userEntity, createUserDto.Password!.Trim()),
+
+                // Set the joined time
+                Created = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+
+            };
+            
             // Add the entity to the database
             _context.Users.Add(entity);
 

@@ -17,6 +17,20 @@ public class UserEntity {
     public int UserId { get; set; }
 
     /// <summary>
+    /// User's First Name field
+    /// </summary>
+    [DataType(DataType.Text)]
+    [MaxLength(50)]
+    public string? FirstName { get; set; }
+
+    /// <summary>
+    /// User's Last Name field
+    /// </summary>
+    [DataType(DataType.Text)]
+    [MaxLength(50)]
+    public string? LastName { get; set; }    
+
+    /// <summary>
     /// User's email field
     /// </summary>
     [Required]
@@ -26,6 +40,7 @@ public class UserEntity {
     /// <summary>
     /// User's password field
     /// </summary>
+    [Required]
     [DataType(DataType.Text)]
     [MaxLength(250)]
     public string? Password { get; set; }
