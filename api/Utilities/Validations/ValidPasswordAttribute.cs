@@ -1,5 +1,6 @@
 // System Utils
 using System.ComponentModel.DataAnnotations;
+using api.Utilities.Sanitization;
 
 // Namespace for Validations
 namespace api.Utilities.Validations;
@@ -24,7 +25,7 @@ public class ValidPasswordAttribute: ValidationAttribute {
         }
 
         // Validate password format
-        var password = value.ToString();
+        var password = PasswordSanitization.SafePassword(value.ToString());
 
         // Verify if password is valid
         if (password!= null && (password.Length < 8 || password.Length > 20)) {

@@ -198,6 +198,8 @@ public class SocialController(IOptions<AppSettings> options, IUsersRepository us
                     message = Words.Get("SuccessSignIn"),
                     content = new {
                         userId = getUser.Result.UserId.ToString(),
+                        firstName = getUser.Result.FirstName,
+                        lastName = getUser.Result.LastName,
                         email = getUser.Result.Email,
                         token
                     }

@@ -15,7 +15,7 @@ import {
 
 // App Utils
 import type ApiResponse from '../models/api-response.model';
-import type { User } from '../models/user.model';
+import type { User, CreateUser } from '../models/user.model';
 import { environment } from '../../environment';
 import { TokensService } from './tokens.service';
 

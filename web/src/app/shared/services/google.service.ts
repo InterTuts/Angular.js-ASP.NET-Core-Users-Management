@@ -44,8 +44,11 @@ export class GoogleService {
           this.userService.saveUser(content);
           const user: User = {
             userId: content.userId,
+            firstName: content.firstName,
+            lastName: content.lastName,
             email: content.email,
-            token: content.token
+            token: content.token,
+            options: []
           };
           this.userService.currentUserSubject.next(user);
           this.userService.isAuthenticated = true;
@@ -69,8 +72,11 @@ export class GoogleService {
           this.userService.saveUser(content);
           const user: User = {
             userId: content.userId,
+            firstName: content.firstName,
+            lastName: content.lastName,
             email: content.email,
-            token: content.token
+            token: content.token,
+            options: []
           };
           this.userService.currentUserSubject.next(user);
           this.userService.isAuthenticated = true;

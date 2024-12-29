@@ -30,6 +30,11 @@ public class PostgresSql(IOptions<AppSettings> options) : DbContext {
     public required DbSet<UserEntity> Users { get; set; } 
 
     /// <summary>
+    /// Set the entity for Users
+    /// </summary>
+    public required DbSet<UsersOptions> UsersOptions { get; set; } 
+
+    /// <summary>
     /// Users table connection
     /// </summary>
     /// <param name="optionsBuilder">The entity framework settings builder</param>

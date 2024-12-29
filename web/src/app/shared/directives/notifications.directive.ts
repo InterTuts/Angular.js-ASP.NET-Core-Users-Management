@@ -44,7 +44,7 @@ export class NotificationsDirective {
 
     // Set notification text
     notification.innerText = text;
-
+    console.log(text);
     // Append notification to the dom
     this.elementRef.nativeElement.appendChild(notification);
 

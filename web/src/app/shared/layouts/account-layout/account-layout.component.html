@@ -1,11 +1,11 @@
 <div class="account-container">
   <mat-sidenav-container class="account-layout-container">
     <!-- Sidebar -->
-    <mat-sidenav mode="side" class="account-layout-sidenav" #sidenav>
+    <mat-sidenav mode="side" class="account-layout-sidenav" #sidenav [opened]="showSideNav">
       <div class="align-end">
         <button mat-raised-button color="accent" class="account-hide-sidenav" (click)="sidenav.toggle();showSideNav = !showSideNav">
           <mat-icon>arrow_back</mat-icon>
-          Close
+          {{ 'close' | translate }}
         </button>
       </div>
       <div class="row">
@@ -14,7 +14,7 @@
             <mat-icon>search</mat-icon>
           </div>
           <div class="account-sidenav-search-input">
-            <input type="text" placeholder="Search for something ..." />
+            <input type="text" [placeholder]="'search_for_something' | translate" />
           </div>
           <div class="account-sidenav-search-button">
             <button mat-raised-button color="accent" class="account-sidenav-button">
@@ -31,16 +31,22 @@
               {{ 'dashboard' | translate }}
             </span>
           </a>
-          <a mat-list-item routerLink="/account/users">
+          <a mat-list-item routerLink="/account/users" routerLinkActive="active">
             <span class="account-sidenav-text">
               <mat-icon>people</mat-icon>
-              Users
+              {{ 'users' | translate }}
             </span>
           </a>
-          <a mat-list-item routerLink="/account/plans">
+          <a mat-list-item routerLink="/account/plans" routerLinkActive="active">
             <span class="account-sidenav-text">
               <mat-icon>manage_search</mat-icon>
-              Plans
+              {{ 'plans' | translate }}
+            </span>
+          </a>
+          <a mat-list-item routerLink="/account/transactions" routerLinkActive="active">
+            <span class="account-sidenav-text">
+              <mat-icon>price_check</mat-icon>
+              {{ 'transactions' | translate }}
             </span>
           </a>
         </mat-nav-list>
@@ -50,11 +56,11 @@
     <mat-sidenav-content class="account-layout-content">
       <div class="row">
         <div class="text-box align-start">
-          <button mat-raised-button color="accent" [ngClass]="{ 'button-menu': true, 'button-menu-active': showSideNav }" (click)="sidenav.toggle();showSideNav = !showSideNav">
+          <button mat-raised-button color="accent" [ngClass]="{ 'button-menu': true, 'button-menu-active': showSideNav }" (click)="showHideSidebar()">
             <mat-icon>menu</mat-icon>
           </button>
           <div class="account-greeting">
-            <h4>Hello, User</h4>
+            <h4>{{ 'hello' | translate }}, {{ (currentUser?.firstName && currentUser?.lastName)?currentUser?.firstName + ' ' + currentUser?.lastName:'user' | translate }}</h4>
             <p>{{ getTime() }}</p>
           </div>
         </div>

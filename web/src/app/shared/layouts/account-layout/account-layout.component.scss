@@ -116,13 +116,12 @@
           line-height: 40px;
 
           .account-sidenav-button {
-            padding: 0;
+            padding: 10px 0;
             height: 40px;
             border: 0;
             background-color: transparent;
 
             .mat-icon {
-              line-height: 25px;
               font-size: 17px;
             }
 
@@ -140,6 +139,10 @@
         a {
           border-radius: 6px;
 
+          &.active {
+            background-color: rgba($color: colors.$color-grey, $alpha: 0.2) !important;
+          }
+
           .account-sidenav-text {
             display: flex;
             align-items: start;
@@ -148,7 +151,7 @@
             color: rgba($color: colors.$color-black, $alpha: 0.8) !important;
 
             .mat-icon {
-              margin: 1px 5px 0 0;
+              margin: 2px 5px 0 0;
               font-size: 18px;
               color: rgba($color: colors.$color-black, $alpha: 0.8) !important;
             }
@@ -171,7 +174,6 @@
       }
 
       .account-greeting {
-        //margin-left: 15px;
 
         h4 {
           margin: 0 0 5px;

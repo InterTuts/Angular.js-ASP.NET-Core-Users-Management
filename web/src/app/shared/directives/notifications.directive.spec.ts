@@ -22,9 +22,9 @@ describe('NotificationsDirective', () => {
 
     directive.showNotification(type, text);
 
-    const notification = mockElementRef.nativeElement.querySelector('.pc-popup-notification');
+    const notification = mockElementRef.nativeElement.querySelector('.popup-notification');
     expect(notification).not.toBeNull();
-    expect(notification.classList).toContain('pc-popup-notification-success');
+    expect(notification.classList).toContain('popup-notification-success');
     expect(notification.innerText).toBe(text);
   });
 
@@ -34,9 +34,9 @@ describe('NotificationsDirective', () => {
 
     directive.showNotification(type, text);
 
-    const notification = mockElementRef.nativeElement.querySelector('.pc-popup-notification');
+    const notification = mockElementRef.nativeElement.querySelector('.popup-notification');
     expect(notification).not.toBeNull();
-    expect(notification.classList).toContain('pc-popup-notification-error');
+    expect(notification.classList).toContain('popup-notification-error');
     expect(notification.innerText).toBe(text);
   });
 
@@ -46,11 +46,11 @@ describe('NotificationsDirective', () => {
 
     directive.showNotification(type, text);
 
-    let notification = mockElementRef.nativeElement.querySelector('.pc-popup-notification');
+    let notification = mockElementRef.nativeElement.querySelector('.popup-notification');
     expect(notification).not.toBeNull();
 
     setTimeout(() => {
-      notification = mockElementRef.nativeElement.querySelector('.pc-popup-notification');
+      notification = mockElementRef.nativeElement.querySelector('.popup-notification');
       expect(notification).toBeNull();
       done();
     }, 2000);

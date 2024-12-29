@@ -1,4 +1,5 @@
 // Namespace for Dtos
+using api.Repositories;
 using api.Utilities.Validations;
 
 // Namespace for Dtos
@@ -15,6 +16,18 @@ public class UserDto
     public int UserId { get; set; }
 
     /// <summary>
+    /// User's First Name field
+    /// </summary>
+    [ValidName]
+    public string? FirstName { get; set; }   
+
+    /// <summary>
+    /// User's Last Name field
+    /// </summary>
+    [ValidName]
+    public string? LastName { get; set; }    
+
+    /// <summary>
     /// User's email field
     /// </summary>
     [ValidEmail]
@@ -27,6 +40,11 @@ public class UserDto
     public string? Password { get; set; }
 
     /// <summary>
+    /// Member's role field
+    /// </summary>
+    public int Role { get; set; }
+
+    /// <summary>
     /// User's social id field
     /// </summary>
     [ValidCode]
@@ -36,4 +54,5 @@ public class UserDto
     /// Joined time
     /// </summary>
     public long Created { get; set; }
+    public List<UserOptionDto> Options { get; internal set; }
 }

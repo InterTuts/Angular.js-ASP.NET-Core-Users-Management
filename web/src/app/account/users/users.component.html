@@ -12,12 +12,11 @@
           </a>
         </h3>
         <div class="input-group">
-          <input type="text" [placeholder]="'enter_name_email' | translate">
-          <button type="button">
+          <div class="search-group">
             <mat-icon>search</mat-icon>
-            {{ 'search' | translate }}
-          </button>
-          <button type="button" class="blue">
+            <input type="text" [formControl]="searchControl" [placeholder]="'enter_name_email' | translate">
+          </div>
+          <button type="button" class="blue" (click)="exportUsers()">
             <mat-icon>exit_to_app</mat-icon>
             {{ 'export' | translate }}
           </button>
@@ -27,19 +26,27 @@
     <div class="list-body">
       <div class="list-body-head">
         <div class="list-row-users">
-          <div>Name</div>
-          <div>Plan</div>
-          <div>Joined</div>
-          <div>Actions</div>
+          <div>
+            {{ 'name' | translate }}
+          </div>
+          <div>
+            {{ 'plan' | translate }}
+          </div>
+          <div>
+            {{ 'joined' | translate }}
+          </div>
+          <div>
+            {{ 'actions' | translate }}
+          </div>
         </div>
       </div>
-      <div class="list-body-items">
-        <div class="list-row-users">
+      <div class="list-body-items" *ngIf="usersList && usersList.length > 0; else noResults">
+        <div class="list-row-users"*ngFor="let user of usersList">
           <div>
             <img [src]="'user.png'" alt="User Image">
             <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
+              <h3>{{ (user.firstName && user.lastName)?user.firstName + ' ' + user.lastName:user.userId }}</h3>
+              <h4>{{ user.email }}</h4>
             </div>
           </div>
           <div>
@@ -47,336 +54,28 @@
               Free
             </a>
           </div>
-          <div>24-12-2025</div>
           <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            {{ timestamp_to_date(user.created*1000) }}
+          </div>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Delete User">
               <mat-icon>more_vert</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
+            <mat-menu #menu="matMenu" class="no-padding">
+              <button mat-menu-item [routerLink]="['/account/users', user.userId]">
+                <mat-icon>edit</mat-icon>
+                <span>{{ 'edit' | translate }}</span>
               </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="list-row-users">
-          <div>
-            <img [src]="'user.png'" alt="User Image">
-            <div>
-              <h3>Ruslan Sirbu</h3>
-              <h4>info[at]example.com</h4>
-            </div>
-          </div>
-          <div>
-            <a href="#">
-              Free
-            </a>
-          </div>
-          <div>24-12-2025</div>
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
+              <button mat-menu-item (click)="$event.preventDefault();deleteConfirmation(user.userId)">
+                <mat-icon>delete</mat-icon>
+                <span>{{ 'delete' | translate }}</span>
               </button>
             </mat-menu>
           </div>
         </div>
       </div>
     </div>
-    <app-navigation [total]="1000" [page]="3" [limit]="10"></app-navigation>
+    <app-navigation [total]="users.total" [page]="users.page" [limit]="10" (navigate)="navigateTo($event)"></app-navigation>
   </div>
 </app-account-layout>
 <ng-template #newUser>
@@ -474,5 +173,37 @@
         </div>
       </div>
     </form>
+  </div>
+</ng-template>
+<ng-template #noResults>
+  <div class="list-body-items">
+    <div class="no-results">
+      {{ 'no_users_found' | translate }}
+    </div>
+  </div>
+</ng-template>
+<ng-template #deleteUser>
+  <div class="modal-header">
+    <h3>
+      {{ 'are_you_sure' | translate }}
+    </h3>
+    <button type="button" class="modal-hide-modal" (click)="onCloseModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-span-full">
+        <p class="modal-text">
+          {{ 'deleting_user_permanent' | translate }}
+        </p>
+    </div>
+    <div class="modal-button">
+        <div class="text-right">
+            <button type="button" class="option-red-btn confirmation-button" (click)="deleteUserConfirmation()">
+                <mat-icon>task_alt</mat-icon>
+                {{ 'confirm' | translate }}
+            </button>
+        </div>
+    </div>
   </div>
 </ng-template>

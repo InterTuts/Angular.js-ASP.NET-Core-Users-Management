@@ -35,32 +35,3 @@
   }
 
 }
-
-// NOTIFICATION COMPONENT
-.popup-notification {
-  position: fixed;
-  z-index: 9999;
-  bottom: 20px;
-  left: 50%;
-  margin-left: -200px;
-  padding: 9px 14px;
-  width: 400px;
-  min-height: 18px;
-  border-radius: 6px;
-  text-align: center;
-  color: #ffffff;
-
-  &.popup-notification-success {
-    background-color: colors.$color-blue;
-  }
-
-  &.popup-notification-error {
-    background-color: colors.$color-red;
-  }
-
-  i {
-    vertical-align: middle;
-    margin-right: 5px;
-    font-size: 22px;
-  }
-}

@@ -7,7 +7,7 @@ namespace api.Utilities;
 /// <summary>
 /// This class was created to manage better the strings
 /// </summary>
-public static class Words
+public class Words
 {
     /// <summary>
     /// Get a string by name and culture

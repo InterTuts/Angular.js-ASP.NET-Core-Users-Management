@@ -38,6 +38,12 @@ public class UserEntity {
     public string? Email { get; set; }
 
     /// <summary>
+    /// Member's role field
+    /// </summary>
+    [Required]
+    public int Role { get; set; }
+
+    /// <summary>
     /// User's password field
     /// </summary>
     [Required]

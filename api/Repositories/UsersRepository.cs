@@ -11,16 +11,25 @@ using api.Models.Entities.Users;
 using api.Services.Interfaces;
 using api.Utilities.Db;
 using api.Utilities;
+using Microsoft.Extensions.Caching.Memory;
 
 // Namespace for repositories
 namespace api.Repositories;
+
+public class UserOptionDto
+{
+    public int OptionId { get; set; }
+    public string OptionName { get; set; }
+    public string? OptionValue { get; set; }
+}
 
 /// <summary>
 /// Users Repository pattern
 /// </summary>
 /// <param name="_context">Database connection</param>
+/// <param name="_memoryCache">Usery cache instance</param>
 /// <param name="logger">Logger instance</param>
-public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logger) : IUsersRepository {
+public class UsersRepository(PostgresSql _context, IMemoryCache _memoryCache, ILogger<UsersRepository> logger) : IUsersRepository {
 
     /// <summary>
     /// Register a user
@@ -74,6 +83,9 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
 
             // Verify if the user was created
             if ( saveUser > 0 ) {
+
+                // Remove the caches for users group
+                new Cache(_memoryCache).Remove("users"); 
 
                 // Return response
                 return new ResponseDto<UserDto> {
@@ -134,10 +146,10 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
             UserEntity entity = new() {     
 
                 // Set the user's first name
-                FirstName = createUserDto.First_name!.Trim(),
+                FirstName = createUserDto.FirstName!.Trim(),
 
                 // Set the user's last name
-                LastName = createUserDto.Last_name!.Trim(),
+                LastName = createUserDto.LastName!.Trim(),
 
                 // Set the user's email
                 Email = createUserDto.Email!.Trim(),
@@ -158,6 +170,9 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
 
             // Verify if the user was created
             if ( saveUser > 0 ) {
+
+                // Remove the caches for users group
+                new Cache(_memoryCache).Remove("users"); 
 
                 // Return response
                 return new ResponseDto<UserDto> {
@@ -324,23 +339,145 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
     }
 
     /// <summary>
+    /// Gets all users
+    /// </summary>
+    /// <param name="searchDto">Search parameters</param>
+    /// <returns>List with users</returns>
+    public async Task<ResponseDto<ItemsDto<UserDto>>> GetUsersAsync(SearchDto searchDto) {
+
+        try {
+
+            // Prepare the page
+            int page = (searchDto.Page > 0)?searchDto.Page:1;
+
+            // Prepare the total results
+            int total = 10;
+
+            // Split the keys
+            string[] searchKeys = searchDto.Search!.Split(' ');
+
+            // Create the cache key
+            string cacheKey = "users_" + string.Join("_", searchKeys) + '_' + searchDto.Page;
+
+            // Verify if the cache is saved
+            if ( !_memoryCache.TryGetValue(cacheKey, out Tuple<List<UserDto>, int>? usersResponse ) ) {
+
+                // Request the users without projecting to UserDto yet
+                IQueryable<UserEntity> query = _context.Users.AsQueryable();
+
+                // Apply filtering based on searchKeys
+                foreach (string key in searchKeys) {
+
+                    // To avoid closure issue
+                    string tempKey = key;
+
+                    // Set where parameters
+                    query = query.Where(m =>
+                        EF.Functions.Like(m.FirstName!.ToLower(), $"%{tempKey.ToLower()}%") ||
+                        EF.Functions.Like(m.LastName!.ToLower(), $"%{tempKey.ToLower()}%") ||
+                        EF.Functions.Like(m.Email!.ToLower(), $"%{tempKey.ToLower()}%")
+                    );
+
+                }
+
+                // Request the users
+                List<UserDto> users = await query
+                .Select(user => new UserDto
+                {
+                    UserId = user.UserId,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = user.Role,
+                    Created = user.Created
+                })
+                .OrderByDescending(m => m.UserId)
+                .Skip((page - 1) * total)
+                .Take(total)
+                .ToListAsync();
+
+                // Get the total count before pagination
+                int totalCount = await query.CountAsync();
+
+                // Add data to user response
+                usersResponse = new Tuple<List<UserDto>, int>(users, totalCount);
+
+                // Create the cache options for storing
+                MemoryCacheEntryOptions cacheOptions = new() {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1)
+                };
+
+                // Save the request in the cache
+                _memoryCache.Set(cacheKey, usersResponse, cacheOptions);
+
+                // Save the cache key in the group
+                new Cache(_memoryCache).Save("users", cacheKey);
+
+            }
+
+            // Verify if users exists
+            if ( (usersResponse != null) && (usersResponse.Item1.Count > 0) ) {
+
+                // Return the response
+                return new ResponseDto<ItemsDto<UserDto>> {
+                    Result = new ItemsDto<UserDto> {
+                        Items = usersResponse.Item1,
+                        Total = usersResponse.Item2,
+                        Page = searchDto.Page
+                    },
+                    Message = null
+                };
+
+            } else {
+
+                // Return the response
+                return new ResponseDto<ItemsDto<UserDto>> {
+                    Result = null,
+                    Message = Words.Get("NoUsersFound")
+                };
+
+            }
+
+        } catch ( InvalidOperationException e ) {
+            Console.WriteLine(e.Message);
+
+            // Return the response
+            return new ResponseDto<ItemsDto<UserDto>> {
+                Result = null,
+                Message = Words.Get("NoUsersFound")
+            };                
+
+        }
+
+    }
+
+    /// <summary>
     /// Get user data
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <returns>UserDto with user's data</returns>
-    public async Task<ResponseDto<UserDto>> GetUserAsync(int userId)
-    {
+    public async Task<ResponseDto<UserDto>> GetUserAsync(int userId) {
 
         try {
 
             // Get the user by id
             UserDto? user = await _context.Users
-            .Select(m => new UserDto {
+            .Where(u => u.UserId == userId)
+            .Select(m => new UserDto
+            {
                 UserId = m.UserId,
                 Email = m.Email,
-                Created = m.Created
+                Created = m.Created,
+                Options = _context.UsersOptions
+                    .Where(o => o.UserId == m.UserId)
+                    .Select(o => new UserOptionDto
+                    {
+                        OptionId = o.OptionId,
+                        OptionName = o.OptionName,
+                        OptionValue = o.OptionValue
+                    }).ToList()
             })
-            .FirstAsync(u => u.UserId == userId);
+            .FirstOrDefaultAsync();
 
             // Verify if user exists
             if ( user != null ) {
@@ -441,6 +578,8 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
             .Select(m => new UserDto {
                 UserId = m.UserId,
                 Email = m.Email,
+                FirstName = m.FirstName,
+                LastName = m.LastName,
                 Password = m.Password,
                 Created = m.Created,
                 SocialId = m.SocialId
@@ -474,6 +613,79 @@ public class UsersRepository(PostgresSql _context, ILogger<UsersRepository> logg
             {
                 Result = null,
                 Message = e.Message
+            };
+
+        }
+
+    }
+
+    /// <summary>
+    /// Delete user
+    /// </summary>
+    /// <param name="userId">User ID</param>
+    /// <returns>Bool true if the user was deleted</returns>
+    public async Task<ResponseDto<bool>> DeleteUserAsync(int userId) {
+
+        try {
+
+            // Select the user by id
+            var user = _context.Users.Where(m => m.UserId == userId);
+
+            // Delete the user
+            _context.Users.RemoveRange(user);
+
+            // Save changes
+            int saveChanges = await _context.SaveChangesAsync();
+
+            // Check if the changes were saved
+            if ( saveChanges > 0 ) {
+
+                /*// Get all users options
+                List<UserOptionsEntity>? userOptionsEntities = await _context.UsersOptions.Where(o => o.UserId == userId).ToListAsync();
+
+                // Verify if users options exists
+                if ( (userOptionsEntities != null) && (userOptionsEntities.Count > 0) ) {
+
+                    // Remove bulk options
+                    _context.UsersOptions.RemoveRange(userOptionsEntities);
+
+                    // Save changes
+                    await _context.SaveChangesAsync();
+
+                }*/
+
+                // Create the cache key
+                string cacheKey = "user_" + userId;
+
+                // Delete the cache
+                _memoryCache.Remove(cacheKey);
+
+                // Remove the caches for users group
+                new Cache(_memoryCache).Remove("users"); 
+
+                // Return the success message
+                return new ResponseDto<bool> {
+                    Result = true,
+                    Message = Words.Get("UserWasDeleted")
+                };
+
+            } else {
+
+                // Return the error message
+                return new ResponseDto<bool> {
+                    Result = false,
+                    Message = null
+                };
+                
+            }
+
+        } catch ( InvalidOperationException e ) {
+            Console.WriteLine(e.Message);
+
+            // Return the error message
+            return new ResponseDto<bool> {
+                Result = false,
+                Message = Words.Get("UserWasNotDeleted")
             };
 
         }

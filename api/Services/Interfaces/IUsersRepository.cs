@@ -39,6 +39,13 @@ public interface IUsersRepository
     Task<ResponseDto<UserDto>> SignInAsync(SignInDto signInDto);
 
     /// <summary>
+    /// Gets all users
+    /// </summary>
+    /// <param name="searchDto">Search parameters</param>
+    /// <returns>List with users</returns>
+    Task<ResponseDto<ItemsDto<UserDto>>> GetUsersAsync(SearchDto searchDto);
+
+    /// <summary>
     /// Get user data
     /// </summary>
     /// <param name="userId">User ID</param>
@@ -58,5 +65,12 @@ public interface IUsersRepository
     /// <param name="userDto">User data</param>
     /// <returns>User with email if exists</returns>
     Task<ResponseDto<UserDto>> UserBySocialIdAsync(UserDto userDto);
+
+    /// <summary>
+    /// Delete user
+    /// </summary>
+    /// <param name="userId">User ID</param>
+    /// <returns>Bool true if the user was deleted</returns>
+    Task<ResponseDto<bool>> DeleteUserAsync(int userId);
 
 }

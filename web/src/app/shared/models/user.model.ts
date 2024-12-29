@@ -1,3 +1,5 @@
+import List from "./list.model";
+
 export interface BaseUser {
   email: string;
   password: string;
@@ -9,8 +11,15 @@ export interface UserPassword {
 
 export interface User {
   userId: number;
+  firstName: string;
+  lastName: string;
   email: string;
   token: string;
+  options: Array<{
+    optionId: number;
+    optionName: string;
+    optionValue: string
+  }>
 }
 
 export interface UserLogin {
@@ -20,17 +29,33 @@ export interface UserLogin {
 }
 
 export interface CreateUser extends BaseUser {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface UserSocial {
   success: boolean;
   message: string;
   content?: {
-    userId: number,
-    email: string,
-    token: string,
-    socialId: string
+    userId: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    token: string;
+    socialId: string;
   }
+}
+
+export interface UserInfo extends CreateUser {
+  userId: number;
+  role: number;
+  token: string;
+  sidebar: boolean;
+  created: number;
+}
+
+export interface UsersList {
+  result: List<UserInfo>
+  page: number;
+  total: number;
 }

@@ -13,7 +13,7 @@ import {
 } from 'rxjs';
 
 // App Utils
-import type { CreateUser, User } from '../models/user.model';
+import type { CreateUser, UserInfo } from '../models/user.model';
 import type ApiResponse from '../models/api-response.model';
 import List from '../models/list.model';
 import { environment } from '../../environment';
@@ -25,7 +25,7 @@ import { environment } from '../../environment';
 
 // Logic
 export class UsersService {
-  private usersListSubject = new BehaviorSubject<List<User[]> | null>(null);
+  private usersListSubject = new BehaviorSubject<List<UserInfo[]> | null>(null);
   public usersList = this.usersListSubject
     .asObservable()
     .pipe(distinctUntilChanged());
@@ -42,12 +42,12 @@ export class UsersService {
   }
 
   getUsers(page: number, search: string = '') {
-    search = search ? encodeURIComponent(search) : '';
+    search = search ? '&search=' + encodeURIComponent(search) : '';
     // Get the users list
     this.httpClient
-      .get<List<User[]>>(
+      .get<ApiResponse<List<UserInfo[]>>>(
         environment.apiUrl +
-          `api/v1.0/account/users/list?page=${page}&search=${search}`,
+          `api/v1.0/account/users/list?page=${page}${search}`,
       )
       .pipe(
         tap((response) => {
@@ -68,8 +68,8 @@ export class UsersService {
 
   // Private methods
 
-  private updateUsersList(response: List<User[]>) {
-    this.usersListSubject.next(response.items ? response : null);
+  private updateUsersList(response: ApiResponse<List<UserInfo[]>>) {
+    this.usersListSubject.next(response.content?.items ? response.content : null);
   }
 
   private handleErrors(error: unknown) {

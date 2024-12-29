@@ -1,6 +1,7 @@
 // System Utils
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using api.Utilities.Sanitization;
 
 // Namespace for Validations
 namespace api.Utilities.Validations;
@@ -25,7 +26,7 @@ public class ValidEmailAttribute: ValidationAttribute {
         }
 
         // Validate email format
-        var email = value.ToString();
+        var email = EmailSanitization.SafeEmail(value.ToString());
 
         // Verify if email is valid
         if (email != null && !Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")) {

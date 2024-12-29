@@ -49,6 +49,9 @@ namespace api.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.Property<string>("SocialId")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
@@ -56,6 +59,30 @@ namespace api.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("api.Models.Entities.Users.UsersOptions", b =>
+                {
+                    b.Property<int>("OptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OptionId"));
+
+                    b.Property<string>("OptionName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("OptionValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("OptionId");
+
+                    b.ToTable("UsersOptions");
                 });
 #pragma warning restore 612, 618
         }

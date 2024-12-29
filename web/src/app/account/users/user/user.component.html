@@ -1,0 +1,77 @@
+<app-account-layout>
+  <div class="user-container">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-7 gap-1 sm:gap-1 md:gap-6 lg:gap-6 xl:gap-6 mb-3">
+      <div class="user-options col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-3">
+        <form [formGroup]="userDataForm" (submit)="onSubmitUserData($event)">
+          <div class="flex">
+            <div class="w-full">
+              <h3 class="section-title">
+                {{ 'basic_information' | translate }}
+              </h3>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="w-full">
+              <ul class="options">
+                <app-field-text [placeholder]="'enter_first_name' | translate" [disabled]="false" [control]="firstNameControl">
+                  {{ 'first_name' | translate }}
+                </app-field-text>
+                <app-field-text [placeholder]="'enter_last_name' | translate" [disabled]="false" [control]="lastNameControl">
+                  {{ 'last_name' | translate }}
+                </app-field-text>
+                <app-field-email [placeholder]="'enter_email_address' | translate" [disabled]="true" [control]="emailControl">
+                  {{ 'email' | translate }}
+                </app-field-email>
+              </ul>
+            </div>
+          </div>
+          <div class="flex mt-10">
+            <div class="w-full">
+              <h3 class="section-title">{{ 'advanced' | translate }}</h3>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="w-full">
+              <ul class="options">
+
+              </ul>
+            </div>
+          </div>
+          <div class="flex mt-5 mb-10">
+            <div class="w-full text-right">
+              <button type="submit" class="mb-3 option-btn option-green-btn">
+                {{ 'save_changes' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+        <form [formGroup]="userPasswordForm" (submit)="onSubmitUserPassword($event)">
+          <div class="flex mt-10">
+            <div class="w-full">
+              <h3 class="section-title">
+                {{ 'security' | translate }}
+              </h3>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="w-full">
+              <ul class="options">
+              </ul>
+            </div>
+          </div>
+          <div class="flex mt-5 mb-10">
+            <div class="w-full text-right">
+              <button type="submit" class="mb-3 option-btn option-green-btn">
+                {{ 'save_changes' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="user-events col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-3">
+
+      </div>
+    </div>
+  </div>
+</app-account-layout>

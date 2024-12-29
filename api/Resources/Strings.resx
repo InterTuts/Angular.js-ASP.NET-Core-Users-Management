@@ -122,5 +122,20 @@
     </data> 
     <data name="NameTooLong" xml:space="preserve">
         <value>The first or last name is too long.</value>
-    </data>                                                             
+    </data>
+    <data name="TextTooLong" xml:space="preserve">
+        <value>The text value is too long.</value>
+    </data>   
+    <data name="UserWasDeleted" xml:space="preserve">
+        <value>The user was deleted successfully.</value>
+    </data>
+    <data name="UserWasNotDeleted" xml:space="preserve">
+        <value>The user was not deleted successfully.</value>
+    </data>
+    <data name="UserOptionsSaved" xml:space="preserve">
+        <value>The options were saved successfully.</value>
+    </data> 
+    <data name="UserOptionsNotSaved" xml:space="preserve">
+        <value>The options were not saved successfully.</value>
+    </data>                                                        
 </root>

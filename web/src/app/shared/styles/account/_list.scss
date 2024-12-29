@@ -98,6 +98,22 @@
 
     }
 
+    .search-group {
+      display: flex;
+      position: relative;
+
+      .mat-icon {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+      }
+
+      input[type="text"] {
+        padding: 0 15px 0 40px;
+      }
+
+    }
+
   }
 
   .list-body {

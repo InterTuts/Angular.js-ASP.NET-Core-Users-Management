@@ -1,9 +1,9 @@
 // System Utils
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 // App Utils
 using api.Utilities;
+using api.Utilities.Sanitization;
 
 /// <summary>
 /// Create a custom validation for name
@@ -24,8 +24,8 @@ public class ValidNameAttribute : ValidationAttribute {
             return ValidationResult.Success;
         }
 
-        // Sanitize input name (e.g., remove leading/trailing spaces and disallowed characters)
-        var sanitizedName = SanitizeInput(value.ToString()!);
+        // Remove leading/trailing spaces and disallowed characters
+        var sanitizedName = NameSanitization.SafeName(value.ToString()!);
 
         // If sanitized name is empty after trimming, it's invalid
         if (string.IsNullOrWhiteSpace(sanitizedName)) {
@@ -40,21 +40,4 @@ public class ValidNameAttribute : ValidationAttribute {
         return ValidationResult.Success;
     }
 
-    /// <summary>
-    /// Sanitizes the input name.
-    /// Removes leading/trailing spaces and restricts disallowed characters.
-    /// </summary>
-    /// <param name="input">Name input to sanitize</param>
-    /// <returns>Sanitized name</returns>
-    private string SanitizeInput(string input) {
-
-        // Trim leading and trailing spaces
-        string sanitized = input.Trim();
-
-        // Allow letters, numbers, spaces, and specific special characters: . " ' ! @ / \ 
-        sanitized = Regex.Replace(sanitized, @"[^a-zA-Z0-9\s.\""!@/\\']", ""); 
-
-        return sanitized;
-
-    }
 }

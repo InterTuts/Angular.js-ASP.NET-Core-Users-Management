@@ -1,0 +1,394 @@
+// GENERAL COLORS
+@use '../../../shared/styles/general/colors';
+
+// GENERAL FONTS
+@use '../../../shared/styles/general/fonts';
+
+// OPTIONS COMPONENT
+.options {
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: 15px;
+    list-style: none;
+
+
+  }
+}
+
+.option-text,
+.option-email,
+.option-number,
+.option-password {
+  padding-top: 0;
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+
+  input {
+    margin-top: 20px;
+    padding: 10px 40px 10px 15px;
+    width: 100%;
+    height: 30px;
+    border: 0;
+    border-radius: 0 0 12px 12px;
+    font-size: 13px;
+    background-color: transparent;
+    color: colors.$color-violet;
+
+    &::placeholder {
+      color: rgba($color: colors.$color-violet, $alpha: 0.7);
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    font-family: fonts.$font-2;
+    font-size: 12px;
+    font-weight: 400;
+    color: colors.$color-black;
+  }
+
+  .option-text-input:focus ~ label,
+  .option-email-input:focus ~ label,
+  .option-number-input:focus ~ label,
+  .option-password-input:focus ~ label {
+    font-size: 12px;
+    font-weight: 400;
+    color: colors.$color-black;
+  }
+}
+
+.option-textarea {
+  padding-top: 0;
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+
+  textarea {
+    margin-top: 20px;
+    padding: 10px 40px 10px 15px;
+    width: 100%;
+    height: 200px;
+    border: 0;
+    border-radius: 0 0 12px 12px;
+    font-size: 13px;
+    background-color: transparent;
+    color: colors.$color-violet;
+    resize: none;
+
+    &::placeholder {
+      color: rgba($color: colors.$color-violet, $alpha: 0.7);
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    font-family: fonts.$font-2;
+    font-size: 12px;
+    font-weight: 400;
+    color: colors.$color-violet;
+  }
+
+  .option-textarea-input:focus ~ label {
+    font-size: 12px;
+    font-weight: 400;
+    color: colors.$color-violet;
+  }
+}
+
+.option-password {
+  input[type='password'] + button {
+    .option-password-eye-hide-icon {
+      display: block;
+    }
+
+    .option-password-eye-icon {
+      display: none;
+    }
+  }
+
+  input[type='text'] + button {
+    .option-password-eye-hide-icon {
+      display: none;
+    }
+
+    .option-password-eye-icon {
+      display: block;
+    }
+  }
+}
+
+.option-copy-button,
+.option-show-password-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: colors.$color-black;
+
+  &:hover {
+    color: colors.$color-black-light;
+  }
+
+  * {
+    font-size: 18px;
+  }
+}
+
+.option-dropdown {
+  border-radius: 12px;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+
+  .dropdown {
+    .button {
+      padding: 15px;
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+
+      div {
+        left: 15px;
+        font-family: fonts.$font-2;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba($color: colors.$color-violet, $alpha: 1);
+      }
+
+      .dropdown-arrow-down-icon {
+        line-height: 29px;
+      }
+    }
+
+    .dropdown-menu {
+      margin-top: 3px;
+      width: 100%;
+
+      ul {
+
+        li {
+          margin: 0;
+        }
+
+      }
+
+    }
+  }
+}
+
+.option-list-manager {
+  padding: 15px;
+  border-radius: 12px;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+
+  h4 {
+    line-height: 23px;
+    font-family: fonts.$font-2;
+    font-size: 13px;
+    font-weight: 400;
+    color: colors.$color-violet;
+  }
+
+  .option-list-manager-new-item {
+    height: 24px;
+    border: 1px solid rgba($color: colors.$color-violet, $alpha: 1);
+    border-radius: 4px;
+    background-color: transparent;
+
+    .new-icon {
+      font-size: 22px;
+      color: rgba($color: colors.$color-violet, $alpha: 1);
+      pointer-events: none;
+    }
+
+    &:hover {
+      border-color: rgba($color: colors.$color-violet, $alpha: 0.4);
+
+      .new-icon {
+        color: rgba($color: colors.$color-violet, $alpha: 0.4);
+        pointer-events: none;
+      }
+    }
+  }
+
+  ul {
+    margin: 15px 0 0;
+    padding: 0;
+
+    &:empty {
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 15px;
+      padding: 7px 15px;
+      border-radius: 7px;
+      background-color: #ffffff;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      span {
+        padding-right: 25px;
+        line-height: 25px;
+        font-family: fonts.$font-2;
+        font-size: 13px;
+        font-weight: 400;
+        color: colors.$color-violet;
+      }
+
+      button {
+        margin-top: 1px;
+        height: 18px;
+        font-size: 12px;
+        border-bottom: 1px solid colors.$color-violet;
+        color: colors.$color-violet;
+
+        &:hover {
+          border-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.option-checkbox {
+  width: 100%;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  label {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+    font-family: fonts.$font-3;
+    font-size: 13px;
+    font-weight: 400;
+    background-color: rgba($color: #ffffff, $alpha: 0.1);
+    color: rgba($color: #ffffff, $alpha: 0.6);
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 3px;
+      background-color: rgba($color: colors.$color-violet, $alpha: 0.02);
+    }
+
+    @media (max-width: 666px) {
+      width: 100%;
+    }
+
+    .option-checkbox-checked-icon {
+      display: none;
+    }
+
+    .option-checkbox-check-icon,
+    .option-checkbox-checked-icon {
+      vertical-align: middle;
+      margin-top: -4px;
+      margin-right: 8px;
+      font-size: 22px;
+    }
+
+    .option-checkbox-checked-text {
+      display: none;
+    }
+  }
+
+  input:checked + label {
+    color: #ffffff;
+
+    .option-checkbox-check-icon {
+      display: none;
+    }
+
+    .option-checkbox-checked-icon {
+      display: inline-block;
+    }
+
+    .option-checkbox-check-text {
+      display: none;
+    }
+
+    .option-checkbox-checked-text {
+      display: inline-block;
+    }
+  }
+}
+
+.option-btn {
+  margin-left: 15px;
+  padding: 0 15px;
+  width: fit-content;
+  height: 40px;
+  border-radius: 6px;
+  font-family: fonts.$font-1;
+  font-size: 13px;
+  background-color: colors.$color-blue;
+  color: colors.$color-black;
+
+  & > * {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-right: 2px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 24px;
+
+    * {
+      font-size: 24px;
+    }
+
+  }
+
+  &.option-green-btn {
+    background-color: rgba($color: colors.$color-green, $alpha: 1);
+
+    &:hover {
+      background-color: rgba($color: colors.$color-green, $alpha: 0.6);
+    }
+  }
+
+  &.option-blue-btn {
+    background-color: rgba($color: colors.$color-blue, $alpha: 1);
+
+    &:hover {
+      background-color: rgba($color: colors.$color-blue, $alpha: 0.6);
+    }
+  }
+
+  &.option-red-btn {
+    background-color: rgba($color: colors.$color-red, $alpha: 0.6);
+    color: #ffffff;
+
+    &:hover {
+      background-color: rgba($color: colors.$color-red, $alpha: 0.4);
+    }
+  }
+
+  &.option-active-btn {
+    .load-more-icon {
+      display: inline-block;
+    }
+  }
+}

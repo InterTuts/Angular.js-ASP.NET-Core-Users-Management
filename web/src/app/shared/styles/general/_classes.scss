@@ -38,9 +38,11 @@
 }
 
 .no-results {
+  display: inline-block;
+  box-sizing: border-box;
   margin: 15px !important;
   padding: 12px 15px !important;
-  width: 100% !important;
+  width: calc(100% - 30px) !important;
   font-family: fonts.$font-2 !important;
   font-size: 14px !important;
   font-weight: 400 !important;

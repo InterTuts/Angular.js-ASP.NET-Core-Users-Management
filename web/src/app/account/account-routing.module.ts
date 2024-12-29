@@ -8,6 +8,8 @@ import { NotFoundComponent } from '../shared/errors/not-found/not-found.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { PlansComponent } from './plans/plans.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { UserComponent } from './users/user/user.component';
 
 // Supported Routes
 const routes: Routes = [
@@ -19,10 +21,17 @@ const routes: Routes = [
     path: 'users',
     component: UsersComponent,
     canActivate: [AccountGuard]
-  },
-  {
+  }, {
+    path: 'users/:id',
+    component: UserComponent,
+    canActivate: [AccountGuard],
+  }, {
     path: 'plans',
     component: PlansComponent,
+    canActivate: [AccountGuard]
+  }, {
+    path: 'transactions',
+    component: TransactionsComponent,
     canActivate: [AccountGuard]
   }, {
     path: '**',

@@ -1,9 +1,9 @@
 // System Utils
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 // App Utils
 using api.Utilities;
+using api.Utilities.Sanitization;
 
 /// <summary>
 /// Create a custom Validation for code
@@ -24,8 +24,8 @@ public class ValidCodeAttribute : ValidationAttribute {
             return ValidationResult.Success;
         }
 
-        // Sanitize input code (e.g., remove leading/trailing spaces and disallowed characters)
-        var sanitizedCode = SanitizeInput(value.ToString()!);
+        // Remove leading/trailing spaces and disallowed characters
+        var sanitizedCode = CodeSanitization.SafeCode(value.ToString()!);
 
         // If sanitized code is empty after trimming, it's invalid
         if (string.IsNullOrWhiteSpace(sanitizedCode)) {
@@ -34,22 +34,5 @@ public class ValidCodeAttribute : ValidationAttribute {
 
         return ValidationResult.Success;
     }
-
-    /// <summary>
-    /// Sanitizes the input code.
-    /// Removes leading/trailing spaces and restricts disallowed characters.
-    /// </summary>
-    /// <param name="input">Code input to sanitize</param>
-    /// <returns>Sanitized code</returns>
-    private string SanitizeInput(string input) {
-
-        // Trim leading and trailing spaces
-        string sanitized = input.Trim();
-
-        // Allow letters, numbers, spaces, and specific special characters: . " ' ! @ / \ 
-        sanitized = Regex.Replace(sanitized, @"[^a-zA-Z0-9\s.\""!@/\\']", ""); 
-
-        return sanitized;
-
-    }
+    
 }

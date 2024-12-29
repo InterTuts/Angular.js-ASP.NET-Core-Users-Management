@@ -1,0 +1,9 @@
+<li class="extra-option">
+  <div class="relative option-text">
+    <input type="text" [name]="uniqueId" [placeholder]="placeholder" value="" [id]="uniqueId" [formControl]="control"
+      class="option-text-input" [autocomplete]="uniqueId" [readonly]="disabled" />
+    <label [for]="uniqueId">
+      <ng-content></ng-content>
+    </label>
+  </div>
+</li>
